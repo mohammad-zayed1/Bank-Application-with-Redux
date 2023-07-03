@@ -32,11 +32,17 @@ numberOfAccounts : 2
             };
             state.accounts.push(newAccount);
             state.numberOfAccounts += 1;
+    },
+    deleteAccount: (state , action) =>{
+        const id = action.payload;
+        console.log("id:",id);
+        state.accounts = state.accounts.filter((account)=> account.id !== id);
+        state.numberOfAccounts -= 1;
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {addAccount} = bankSlice.actions;
+export const {addAccount , deleteAccount} = bankSlice.actions;
 
 export default bankSlice.reducer;

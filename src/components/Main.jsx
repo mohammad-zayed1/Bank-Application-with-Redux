@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addAccount } from "../bank/bankSlice";
+import { addAccount , deleteAccount } from "../bank/bankSlice";
+import {AiOutlineDelete} from 'react-icons/ai';
 export const Main = () => {
   const [info, setInfo] = useState({
+    id:"",
     customerName: "",
     accountNumber: "",
     accountType: "",
@@ -14,6 +16,7 @@ export const Main = () => {
     const { name, value } = e.target;
     setInfo((prev) => ({
       ...prev,
+      id:length + 1,
       [name]: value,
     }));
   };
@@ -21,9 +24,26 @@ export const Main = () => {
     e.preventDefault();
     dispatch(addAccount(info));
   };
+  const handleDelete = (id)=>{
+    // e.preventDefault();
+  dispatch(deleteAccount(id))
+
+  }
   console.log(length);
 
   console.log(accounts);
+
+  const tableRows = accounts.map((account, index) => {
+    return (
+      <tr key={account.id}>
+        <th>{index + 1}</th>
+        <td>{account.customerName}</td>
+        <td>{account.accountNumber}</td>
+        <td>{account.accountType}</td>
+        <td><button type="button" onClick={()=> handleDelete(account.id)} className="btn btn-error text-black"><AiOutlineDelete /></button></td>
+      </tr>
+    );
+  })
   return (
     <div className="h-screen p-8  flex flex-col">
       <div className="flex mb-5 gap-2">
@@ -40,19 +60,11 @@ export const Main = () => {
               <th>Customer Name</th>
               <th>Account Number</th>
               <th>Account Type</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {accounts.map((account, index) => {
-              return (
-                <tr key={account.id}>
-                  <th>{index + 1}</th>
-                  <td>{account.customerName}</td>
-                  <td>{account.accountNumber}</td>
-                  <td>{account.accountType}</td>
-                </tr>
-              );
-            })}
+            {tableRows.length === 0 ? <div className="p-2 text-lg">There are no Accounts </div> : tableRows}
             {/* row 1 */}
           </tbody>
         </table>
