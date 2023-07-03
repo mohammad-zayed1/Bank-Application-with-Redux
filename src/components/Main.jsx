@@ -100,10 +100,10 @@ export const Main = () => {
             <option disabled selected>
               select account type
             </option>
-            <option value="saving">Saving</option>
-            <option value="student">Student </option>
+            <option value="saving">Saving account</option>
+            <option value="student">Student account </option>
           </select>
-          <button className="btn btn-secondary  max-w-xs">add</button>
+          <button className="btn btn-neutral  max-w-xs">add</button>
         </form>
       </div>
     </div>
