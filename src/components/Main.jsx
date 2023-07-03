@@ -103,7 +103,7 @@ export const Main = () => {
             <option value="saving">Saving account</option>
             <option value="student">Student account </option>
           </select>
-          <button className="btn btn-neutral  max-w-xs">add</button>
+          <button className="btn btn-neutral  max-w-xs">Add New Account</button>
         </form>
       </div>
     </div>
