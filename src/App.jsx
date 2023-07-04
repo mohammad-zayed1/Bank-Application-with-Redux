@@ -11,6 +11,7 @@ function App() {
     <div className='flex flex-col h-screen'>
     <Nav/>
     <Main/>
+
   <Footer/>
 
     </div>

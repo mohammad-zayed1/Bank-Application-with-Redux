@@ -3,20 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { addAccount , deleteAccount } from "../bank/bankSlice";
 import {AiOutlineDelete} from 'react-icons/ai';
 export const Main = () => {
+  const length = useSelector((state) => state.bank.numberOfAccounts);
+  const accounts = useSelector((state) => state.bank.accounts);
+  const dispatch = useDispatch();
   const [info, setInfo] = useState({
     id:"",
     customerName: "",
     accountNumber: "",
     accountType: "",
   });
-  const dispatch = useDispatch();
-  const accounts = useSelector((state) => state.bank.accounts);
-  const length = useSelector((state) => state.bank.numberOfAccounts);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo((prev) => ({
       ...prev,
-      id:length + 1,
       [name]: value,
     }));
   };
@@ -35,7 +34,7 @@ export const Main = () => {
 
   const tableRows = accounts.map((account, index) => {
     return (
-      <tr key={account.id}>
+      <tr key={index + 1}>
         <th>{index + 1}</th>
         <td>{account.customerName}</td>
         <td>{account.accountNumber}</td>
@@ -75,6 +74,14 @@ export const Main = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 gap-4  w-[400px] justify-center items-center "
         >
+          <input
+            type="number"
+            name="id"
+            value={info.id}
+            onChange={handleChange}
+            placeholder="Type here id"
+            className="input input-bordered  max-w-xs"
+          />
           <input
             type="text"
             name="customerName"
